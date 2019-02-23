@@ -14,26 +14,29 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration extends WebMvcConfigurationSupport {
-    @Bean
-    public Docket productApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("org.alamics.controller"))
-                .build()
-                .apiInfo(metaData());
-    }
-    private ApiInfo metaData() {
-        return new ApiInfoBuilder()
-                .title("Web-библиотека")
-                .description("\"REST API для web-библиотеки\"")
-                .build();
-    }
-    @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
 
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }
+  @Bean
+  Docket productApi() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("org.alamics.controller"))
+        .build()
+        .apiInfo(metaData());
+  }
+
+  private ApiInfo metaData() {
+    return new ApiInfoBuilder()
+        .title("Web-библиотека")
+        .description("\"REST API для web-библиотеки\"")
+        .build();
+  }
+
+  @Override
+  protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("swagger-ui.html")
+        .addResourceLocations("classpath:/META-INF/resources/");
+
+    registry.addResourceHandler("/webjars/**")
+        .addResourceLocations("classpath:/META-INF/resources/webjars/");
+  }
 }
