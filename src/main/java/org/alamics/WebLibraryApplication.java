@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.alamics.model.Book;
 import org.alamics.repository.BookRepository;
+import org.alamics.repository.BookRepositoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ public class WebLibraryApplication {
 
   @Bean
   BookRepository bookRepository() {
-    BookRepository bookRepository = new BookRepository();
+    BookRepository bookRepository = new BookRepositoryImpl();
     List<Book> defaultBooks = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       defaultBooks.add(new Book(

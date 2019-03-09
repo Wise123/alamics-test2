@@ -19,7 +19,6 @@ public class Book {
   Integer id;
   String name;
   String author;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
   LocalDate releaseDate;
   Boolean inPublicCatalogue;
 }

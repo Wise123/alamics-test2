@@ -1,10 +1,13 @@
-package org.alamics.controller;
+package org.alamics.controller.book;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.alamics.controller.book.dto.BookDto;
 import org.alamics.model.Book;
 import org.alamics.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,31 +25,47 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
 
   @Autowired
-  BookRepository publicBookRepository;
+  BookRepository bookRepository;
 
+  /**
+   * см сваггер.
+   * @param inPrivateCatalogue см сваггер
+   * @return см сваггер
+   */
   @GetMapping("/")
   @ApiOperation(value = "Получить книги по каталогу")
-  public List<Book> findAll(
+  public List<BookDto> findAll(
       Boolean inPrivateCatalogue
   ) {
-    return publicBookRepository.findByFilters(inPrivateCatalogue);
+    return bookRepository
+        .findByFilters(inPrivateCatalogue)
+        .stream()
+        .map(BookDto::fromBook)
+        .collect(Collectors.toList());
   }
 
   /**
    *  см сваггер.
-   * @param books см сваггер
+   * @param bookDtos см сваггер
    * @return см сваггер
    */
   @PostMapping("/")
   @ApiOperation(value = "создать новые книги")
-  public List<Book> saveAll(
+  public List<BookDto> saveAll(
       @RequestBody
-          List<Book> books
+          List<BookDto> bookDtos
   ) {
-    for (Book book : books) {
-      book.setId(null);
+    List<Book> books = new LinkedList<>();
+
+    for (BookDto bookDto : bookDtos) {
+      bookDto.setId(null);
+      books.add(BookDto.toBook(bookDto));
     }
-    return publicBookRepository.saveAll(books);
+    return bookRepository
+        .saveAll(books)
+        .stream()
+        .map(BookDto::fromBook)
+        .collect(Collectors.toList());
   }
 
   /**
@@ -56,24 +75,38 @@ public class BookController {
    */
   @PutMapping("/")
   @ApiOperation(value = "отредактировать книги")
-  public List<Book> updateAll(
+  public List<BookDto> updateAll(
       @RequestBody
-          List<Book> books
+          List<BookDto> books
   ) {
-    return publicBookRepository.saveAll(books);
+    return bookRepository.saveAll(
+        books
+            .stream()
+            .map(BookDto::toBook)
+            .collect(Collectors.toList()))
+        .stream()
+        .map(BookDto::fromBook)
+        .collect(Collectors.toList());
   }
 
   /**
    *  см сваггер.
-   * @param books см сваггер
+   * @param bookDtos см сваггер
    * @return см сваггер
    */
   @DeleteMapping("/")
   @ApiOperation(value = "удалить книги")
-  public List<Book> deleteAll(
+  public List<BookDto> deleteAll(
       @RequestBody
-          List<Book> books
+          List<BookDto> bookDtos
   ) {
-    return publicBookRepository.deleteAll(books);
+    return bookRepository
+        .deleteAll(bookDtos
+            .stream()
+            .map(BookDto::toBook)
+            .collect(Collectors.toList()))
+        .stream()
+        .map(BookDto::fromBook)
+        .collect(Collectors.toList());
   }
 }
