@@ -2,3 +2,8 @@
 **/*.iml
 
 target
+
+src/main/web-library/node_modules/
+src/main/web-library/package-lock.json
+src/main/web-library/.idea/
+src/main/resources/static

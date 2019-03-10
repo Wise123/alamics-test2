@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,6 +36,7 @@ public class BookController {
   @GetMapping("/")
   @ApiOperation(value = "Получить книги по каталогу")
   public List<BookDto> findAll(
+      @RequestParam(required = false)
       Boolean inPrivateCatalogue
   ) {
     return bookRepository
