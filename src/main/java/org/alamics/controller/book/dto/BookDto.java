@@ -20,7 +20,7 @@ public class BookDto {
   Integer id;
   String name;
   String author;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   LocalDate releaseDate;
   Boolean inPublicCatalogue;
 

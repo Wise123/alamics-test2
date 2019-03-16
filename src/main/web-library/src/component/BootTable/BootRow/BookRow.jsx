@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {toDate, toDateString} from "../../../util/dateUtil";
 
 class BookRow extends Component {
+
+
 
     componentWillMount() {
         const {book} = this.props;
@@ -41,9 +46,9 @@ class BookRow extends Component {
                                 value={book.author}/>
                     </td>
                     <td>
-                        <input
-                                onChange={(e) => this.updateCachedBook({...book, releaseDate: e.target.value})}
-                                value={book.releaseDate}
+                        <DatePicker
+                                onChange={(date) => this.updateCachedBook({...book, releaseDate: toDateString(date)})}
+                                selected={toDate(book.releaseDate)}
                         />
                     </td>
                     <td>
