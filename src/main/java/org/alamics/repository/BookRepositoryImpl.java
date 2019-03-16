@@ -22,8 +22,10 @@ public class BookRepositoryImpl implements BookRepository {
         .values()
         .stream()
         .filter((Book book) ->
-            book.getInPublicCatalogue().equals(isInPrivateCatalogue)
-                || isInPrivateCatalogue == null)
+            book.getInPublicCatalogue() != null
+            && book.getInPublicCatalogue().equals(isInPrivateCatalogue)
+            || isInPrivateCatalogue == null
+        )
         .collect(Collectors.toList());
   }
 
