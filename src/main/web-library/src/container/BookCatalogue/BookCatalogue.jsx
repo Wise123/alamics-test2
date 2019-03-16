@@ -2,19 +2,26 @@ import React, { Component } from "react";
 import {connect} from 'react-redux';
 import * as actionCreators from "../../actionCreators/index"
 import {bindActionCreators} from 'redux'
+import './BookCatalogue.css'
+import BookTable from '../../component/BootTable/BookTable';
 
 class BookCatalogue extends Component {
+
     render() {
+
         return (
-            <div>
-                <h1>{JSON.stringify(this.props.books)}</h1>
-            </div>
+            <BookTable
+                updateBooks={this.props.updateBooks}
+                deleteBooks={this.props.deleteBooks}
+                createBooks={this.props.createBooks}
+                books={this.props.books}
+            />
         );
     }
 
     componentWillMount() {
-        this.props.getBooks()
-        console.log(this.props)
+        this.props.getBooks();
+        this.setState({...this.state, newBooks: []})
     }
 }
 

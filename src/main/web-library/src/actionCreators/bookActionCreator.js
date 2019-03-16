@@ -20,3 +20,61 @@ export function getBooks() {
             );
     };
 }
+
+export function createBooks(books) {
+    return function (dispatch) {
+        dispatch({
+            type: types.CREATE_BOOKS_REQUEST,
+        });
+        return bookApi.updateBooks(books).then(checkStatus)
+            .then(
+                (response) => {
+                    dispatch({type: types.CREATE_BOOKS_SUCCESS, books: response.data})
+                }
+            )
+            .catch(
+                error => {
+                    dispatch({type: types.CREATE_BOOKS_FAILURE})
+                }
+            );
+    };
+}
+
+export function updateBooks(books) {
+    return function (dispatch) {
+        dispatch({
+            type: types.UPDATE_BOOKS_REQUEST,
+        });
+        return bookApi.updateBooks(books).then(checkStatus)
+            .then(
+                (response) => {
+                    dispatch({type: types.UPDATE_BOOKS_SUCCESS, books: response.data})
+                }
+            )
+            .catch(
+                error => {
+                    dispatch({type: types.UPDATE_BOOKS_FAILURE})
+                }
+            );
+    };
+}
+
+export function deleteBooks(books) {
+    return function (dispatch) {
+        dispatch({
+            type: types.DELETE_BOOKS_REQUEST,
+        });
+        return bookApi.deleteBooks(books).then(checkStatus)
+            .then(
+                (response) => {
+                    dispatch({type: types.DELETE_BOOKS_SUCCESS, books: response.data})
+                }
+            )
+            .catch(
+                error => {
+                    console.log(error);
+                    dispatch({type: types.DELETE_BOOKS_FAILURE})
+                }
+            );
+    };
+}
