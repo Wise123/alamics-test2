@@ -1,14 +1,21 @@
 # Web. Библиотека
 
-Для работы приложения требуется JDK 8 или выше и Maven
+Для работы приложения требуется JDK 8 или выше, Maven и Node.js
 
 ## Запуск приложения
 Для того чтобы запустить приложение требуется из директории проекта выполнить команду
 
 ```mvn spring-boot:run```
 
-После этого приложение будет развёрнуто на порту 8080 например
+после этого из директории `src/main/web-library` нужно выполнить команду 
+
+```npm start```
+
+После этого бекенд будет развёрнут на порту 8080 например
 http://localhost:8080/weblibrary-0.0.1/book/?inPrivateCatalogue=true
+
+а фронтенд на порту 3000
+http://localhost:3000/
 
 Кроме того потестить приложение можно апи можно потестить через swagger-ui
 http://localhost:8080/swagger-ui.html
@@ -19,8 +26,11 @@ http://localhost:8080/swagger-ui.html
 
 ``` mvn clean package```
 
-после этого файл `weblibrary-X.X.X.war` можно выложить на томкат. По умолчанию приложение будет доступно по адресу
+после этого файл `weblibrary-X.X.X.war` можно выложить на томкат. По умолчанию бекенд будет доступен по адресу
 http://localhost:8080/weblibrary-0.0.1/book/?inPrivateCatalogue=true
 
 или через swagger-ui по адресу 
 http://localhost:8080/weblibrary-0.0.1/swagger-ui.html
+
+фронтенд будет доступен по адресу 
+http://localhost:8080/weblibrary-0.0.1/index.html
