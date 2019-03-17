@@ -3,7 +3,6 @@ import BookCatalogue from './BookCatalogue/BookCatalogue';
 import './App.css';
 import {Route} from 'react-router-dom';
 import {withRouter} from 'react-router';
-import {bindActionCreators} from 'redux'
 
 class App extends Component {
     render() {

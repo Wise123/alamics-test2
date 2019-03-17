@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import BookRow from "./BootRow/BookRow";
+import PropTypes from 'prop-types';
 
 class BookTable extends Component {
-
-    componentWillMount() {
-        this.setState({...this.state, newBooks: []})
+    constructor(props) {
+        super(props);
+        this.state = {newBooks: []};
     }
 
     createNewBook = () => {
@@ -12,11 +13,12 @@ class BookTable extends Component {
     };
 
     saveNewBooks = (savedBooks) => {
+        const {createBooks} = this.props;
         const newBooks = this.state.newBooks.filter((book) => {
            return savedBooks.findIndex(item => item.temporaryId === book.temporaryId) === -1;
         });
         this.setState({...this.state, newBooks});
-        this.props.createBooks(savedBooks);
+        createBooks && createBooks(savedBooks);
     };
 
     deleteNewBooks = (deletedBooks) => {
@@ -54,8 +56,8 @@ class BookTable extends Component {
     };
 
     render() {
-        const {books, createBooks, updateBooks, deleteBooks} = this.props;
-        const {createBook, newBooks} = this.state;
+        const {books, updateBooks, deleteBooks} = this.props;
+        const {newBooks} = this.state;
         return (
         <div>
             <table id="booksTable">
@@ -79,5 +81,12 @@ class BookTable extends Component {
         );
     }
 }
+
+BookTable.propTypes = {
+    updateBooks: PropTypes.func,
+    deleteBooks: PropTypes.func,
+    createBooks: PropTypes.func,
+    books: PropTypes.array.isRequired
+};
 
 export default BookTable

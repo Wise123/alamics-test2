@@ -4,11 +4,11 @@ import * as actionCreators from "../../actionCreators/index"
 import {bindActionCreators} from 'redux'
 import './BookCatalogue.css'
 import BookTable from '../../component/BootTable/BookTable';
+import PropTypes from 'prop-types';
 
 class BookCatalogue extends Component {
 
     render() {
-
         return (
             <BookTable
                 updateBooks={this.props.updateBooks}
@@ -19,11 +19,20 @@ class BookCatalogue extends Component {
         );
     }
 
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         this.props.getBooks();
-        this.setState({...this.state, newBooks: []})
+        this.state = {newBooks: []};
     }
 }
+
+BookCatalogue.propTypes = {
+    getBooks: PropTypes.func,
+    updateBooks: PropTypes.func,
+    deleteBooks: PropTypes.func,
+    createBooks: PropTypes.func,
+    books: PropTypes.array.isRequired
+};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     ...actionCreators

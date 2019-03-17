@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {toDate, toDateString} from "../../../util/dateUtil";
+import PropTypes from 'prop-types';
 
 class BookRow extends Component {
 
-
-
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         const {book} = this.props;
-        this.setState({...this.state, editMode: false, book})
+        this.state = {editMode: false, book};
     }
 
     toggleEditMode = () => {
@@ -83,5 +83,11 @@ class BookRow extends Component {
         }
     }
 }
+
+BookRow.propTypes = {
+    updateBooks: PropTypes.func,
+    deleteBooks: PropTypes.func,
+    book: PropTypes.object.isRequired
+};
 
 export default BookRow

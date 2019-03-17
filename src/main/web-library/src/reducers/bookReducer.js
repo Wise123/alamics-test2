@@ -21,7 +21,7 @@ export default function bookReducer(state = initialState, action) {
             return state
         }
         case types.UPDATE_BOOKS_SUCCESS: {
-             state.books.map(
+            const newBooks = state.books.map(
                 (book) => {
                     const editedBook = action.books.find((book) => {
                         return book.id === action.book.id;
@@ -34,8 +34,6 @@ export default function bookReducer(state = initialState, action) {
                     }
 
                 });
-            const newBooks = [...state.books];
-            newBooks[editedBookIndex] = action.book;
 
             return {
                 ...state,

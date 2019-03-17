@@ -15,7 +15,7 @@ export function getBooks() {
             )
             .catch(
                 error => {
-                    dispatch({type: types.GET_BOOKS_FAILURE})
+                    dispatch({type: types.GET_BOOKS_FAILURE, error})
                 }
             );
     };
@@ -34,7 +34,7 @@ export function createBooks(books) {
             )
             .catch(
                 error => {
-                    dispatch({type: types.CREATE_BOOKS_FAILURE})
+                    dispatch({type: types.CREATE_BOOKS_FAILURE, error})
                 }
             );
     };
@@ -53,7 +53,7 @@ export function updateBooks(books) {
             )
             .catch(
                 error => {
-                    dispatch({type: types.UPDATE_BOOKS_FAILURE})
+                    dispatch({type: types.UPDATE_BOOKS_FAILURE, error})
                 }
             );
     };
@@ -72,8 +72,7 @@ export function deleteBooks(books) {
             )
             .catch(
                 error => {
-                    console.log(error);
-                    dispatch({type: types.DELETE_BOOKS_FAILURE})
+                    dispatch({type: types.DELETE_BOOKS_FAILURE, error})
                 }
             );
     };
