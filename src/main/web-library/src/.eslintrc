@@ -3,7 +3,7 @@
     "react"
   ],
   "extends": [
-    "eslint:recommended",
+    "google",
     "plugin:react/recommended"
   ],
   "env": {
@@ -14,5 +14,9 @@
     "ecmaFeatures": {
       "jsx": true
     }
+  },
+  "rules": {
+    "no-invalid-this": "off",
+    "require-jsdoc": "off"
   }
 }

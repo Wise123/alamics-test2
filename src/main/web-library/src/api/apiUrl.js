@@ -1,1 +1,1 @@
-export const javaApiUrl = "http://localhost:3000";
+export const javaApiUrl = 'http://localhost:3000';

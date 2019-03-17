@@ -1,28 +1,25 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { createBrowserHistory } from 'history'
-import createRootReducer from '../reducers'
+import {createStore, applyMiddleware, compose} from 'redux';
+import {createBrowserHistory} from 'history';
+import createRootReducer from '../reducers';
 import thunk from 'redux-thunk';
 
 const initialState = {};
 
 export const history = createBrowserHistory();
 
-const middleware = [
-    thunk
-];
+const middleware = [thunk];
 
 const enhancers = [];
 
 const devToolsExtension = window.devToolsExtension;
 
 if (typeof devToolsExtension === 'function') {
-    enhancers.push(devToolsExtension())
+  enhancers.push(devToolsExtension());
 }
-
 
 const composedEnhancers = compose(
     applyMiddleware(...middleware),
-    ...enhancers
+    ...enhancers,
 );
 
 const store = createStore(
@@ -31,4 +28,4 @@ const store = createStore(
     composedEnhancers,
 );
 
-export default store
+export default store;
