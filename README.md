@@ -17,7 +17,7 @@ http://localhost:8080/weblibrary-0.0.1/book/?inPrivateCatalogue=true
 а фронтенд на порту 3000
 http://localhost:3000/
 
-Кроме того потестить приложение можно апи можно потестить через swagger-ui
+Кроме того потестить апи можно потестить через swagger-ui
 http://localhost:8080/swagger-ui.html
 
 
